@@ -4,7 +4,7 @@ This is a web api , which generates 6 digit codes and validates the same for a g
 
 I have used [Otp.NET Nuget Package](https://www.nuget.org/packages/Otp.NET). This follows the TOTP (Timed One Time Password) algorithm.
 
-The code is genertaed based on above said approach , and the validation is done against the cached code for the give phone. Here I have used In-Memory Cache for code persistence.
+The code is genertaed based on above said approach , and the validation is done against the cached code for the given phone. Here I have used In-Memory Cache for code persistence.
 
 [GET] Endpoint generates the code
 [POST] Endpoint validates the code
