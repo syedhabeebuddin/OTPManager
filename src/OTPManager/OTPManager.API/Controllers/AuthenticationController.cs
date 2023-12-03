@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OTPManager.API.Models;
 using OTPManager.API.Validators;
 using OTPManager.Application.Services;
-using OTPManager.Domain.Models;
 
 namespace OTPManager.API.Controllers
 {
@@ -16,6 +16,9 @@ namespace OTPManager.API.Controllers
         }
 
         [HttpGet("{phone}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get2FACode([CustomPhone] string phone)
         {
             if (_otpAuthenticator.IsLimitExceeded(phone))
@@ -25,8 +28,11 @@ namespace OTPManager.API.Controllers
         }
         
         [HttpPost]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Verify2FACode(VerifyCodeRequest verifyCodeRequest)
-        {
+        {            
             return Ok(_otpAuthenticator.VerifyCode(verifyCodeRequest.Phone, verifyCodeRequest.Code));
         }
     }

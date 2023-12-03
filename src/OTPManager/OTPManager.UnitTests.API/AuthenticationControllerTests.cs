@@ -3,8 +3,8 @@ using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using OTPManager.API.Controllers;
+using OTPManager.API.Models;
 using OTPManager.Application.Services;
-using OTPManager.Domain.Models;
 
 namespace OTPManager.UnitTests.API
 {

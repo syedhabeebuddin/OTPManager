@@ -20,18 +20,18 @@ namespace OTPManager.Application.Services
             _cacheManager = cacheManager;
             _optManagerSettings = optManagerSettings.Value;
         }
-        public string GenerateCode(string phoneNumber)
+        public string GenerateCode(string phone)
         {
-            var code = _twoFactorAuthenticator.GenerateCode(phoneNumber);
+            var code = _twoFactorAuthenticator.GenerateCode(phone);
             var metaData = new OTPMetadata
             {
                 Code = code,
                 ExpirationTime = DateTime.UtcNow.AddSeconds(_optManagerSettings.CodeExpirationTimeInSeconds),
                 GeneratedTime = DateTime.UtcNow,
-                Phone = phoneNumber
+                Phone = phone
             };
 
-            _cacheManager.AddItem(phoneNumber, metaData);
+            _cacheManager.AddItem(phone, metaData);
             return code;
         }
 
@@ -48,10 +48,11 @@ namespace OTPManager.Application.Services
             return items != null && items.Count >= limit;
         }
 
-        //public bool VerifyCode(string code, string phoneNumber)
+        //Note : If we consider TOTP algorithm
+        //public bool VerifyCode(string code, string phone)
         //{
         //    long previousTimeStamp = 10;
-        //    var result = _twoFactorAuthenticator.VerifyCode(code, phoneNumber, previousTimeStamp);
+        //    var result = _twoFactorAuthenticator.VerifyCode(code, phone, previousTimeStamp);
         //    return result.isValid;
         //}
     }
