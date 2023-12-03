@@ -6,8 +6,8 @@ I have used [Otp.NET Nuget Package](https://www.nuget.org/packages/Otp.NET). Thi
 
 The code is genertaed based on above said approach , and the validation is done against the cached code for the given phone. Here I have used In-Memory Cache for code persistence.
 
-[GET] Endpoint generates the code
-[POST] Endpoint validates the code
+[GET] Endpoint generates the code.
+[POST] Endpoint validates the code.
 
 I have enabled swagger , so any results can be viewed from swagger UI.
 
