@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OTPManager.Domain\OTPManager.Domain.csproj" />
     <ProjectReference Include="..\OTPManager.Infrastructure.TOTPClient\OTPManager.Infrastructure.TOTPClient.csproj" />
   </ItemGroup>
 

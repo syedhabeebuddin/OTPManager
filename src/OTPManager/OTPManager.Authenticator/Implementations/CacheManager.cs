@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using OTPManager.Authenticator.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OTPManager.Domain.Models;
 
 namespace OTPManager.Authenticator.Implementations
 {
