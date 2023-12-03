@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTPManager.Authenticator", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTPManager.Domain", "OTPManager.Domain\OTPManager.Domain.csproj", "{73B015B0-2477-4407-A737-DF3278D65855}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTPManager.UnitTests.API", "OTPManager.UnitTests.API\OTPManager.UnitTests.API.csproj", "{DF41DBA3-EDCF-4678-80E8-295FE8EA1B68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{73B015B0-2477-4407-A737-DF3278D65855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B015B0-2477-4407-A737-DF3278D65855}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B015B0-2477-4407-A737-DF3278D65855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF41DBA3-EDCF-4678-80E8-295FE8EA1B68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF41DBA3-EDCF-4678-80E8-295FE8EA1B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF41DBA3-EDCF-4678-80E8-295FE8EA1B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF41DBA3-EDCF-4678-80E8-295FE8EA1B68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
