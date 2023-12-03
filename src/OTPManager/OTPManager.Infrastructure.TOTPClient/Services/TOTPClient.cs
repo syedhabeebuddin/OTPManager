@@ -3,8 +3,8 @@
 namespace OTPManager.Infrastructure.TOTPClient.Services
 {
     public class TOTPClient : ITOTPClient
-    {
-        private const string base32Secret = "6L4OH6DDC4PLNQBA5422GM67KXRDIQQP";
+    {        
+        private const string base32Secret = "E6IMKF5WXYQH5OXYH7INKIDHCVYMIANK";
         private readonly Totp totp;
         public TOTPClient()
         {

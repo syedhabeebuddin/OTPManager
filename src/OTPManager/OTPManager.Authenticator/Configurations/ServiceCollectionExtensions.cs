@@ -9,7 +9,7 @@ namespace OTPManager.Authenticator.Configurations
         public static void AddAuthenticatorServices(this IServiceCollection services)
         {
             services.AddScoped<ITwoFactorAuthenticator, TwoFactorAuthenticator>();
-            services.AddScoped<ICacheManager, CacheManager>();
+            services.AddSingleton<ICacheManager, CacheManager>();
         }
     }
 }
