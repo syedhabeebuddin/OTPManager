@@ -1,4 +1,6 @@
-﻿using OTPManager.Authenticator.Contracts;
+﻿using Microsoft.Extensions.Options;
+using OTPManager.Authenticator.Contracts;
+using OTPManager.Domain.Configurations;
 using OTPManager.Domain.Models;
 
 namespace OTPManager.Application.Services
@@ -7,13 +9,16 @@ namespace OTPManager.Application.Services
     {
         private readonly ITwoFactorAuthenticator _twoFactorAuthenticator;        
         private readonly ICacheManager _cacheManager;
+        private readonly OTPManagerSettings _optManagerSettings;
 
         public OTPAuthenticator(
             ITwoFactorAuthenticator twoFactorAuthenticator
-            , ICacheManager cacheManager)
+            , ICacheManager cacheManager
+            , IOptions<OTPManagerSettings> optManagerSettings)
         {
             _twoFactorAuthenticator = twoFactorAuthenticator;
             _cacheManager = cacheManager;
+            _optManagerSettings = optManagerSettings.Value;
         }
         public string GenerateCode(string phoneNumber)
         {
@@ -21,7 +26,7 @@ namespace OTPManager.Application.Services
             var metaData = new OTPMetadata
             {
                 Code = code,
-                ExpirationTime = DateTime.UtcNow.AddSeconds(60),
+                ExpirationTime = DateTime.UtcNow.AddSeconds(_optManagerSettings.CodeExpirationTimeInSeconds),
                 GeneratedTime = DateTime.UtcNow,
                 Phone = phoneNumber
             };
@@ -38,7 +43,7 @@ namespace OTPManager.Application.Services
 
         public bool IsLimitExceeded(string phone)
         {
-            int limit = 2;
+            int limit = _optManagerSettings.AllowedConcurrentCodes;
             var items = _cacheManager.GetItems(phone);
             return items != null && items.Count >= limit;
         }

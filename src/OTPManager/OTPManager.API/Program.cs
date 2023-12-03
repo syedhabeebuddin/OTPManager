@@ -1,4 +1,5 @@
 using OTPManager.API.Configurations;
+using OTPManager.Domain.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.Configure<OTPManagerSettings>(builder.Configuration.GetSection("OTPManagerSettings"));
 builder.Services.AddMemoryCache();
 builder.Services.AddOTPManagerServices();
 var app = builder.Build();
