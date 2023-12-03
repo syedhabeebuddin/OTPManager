@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTPManager.API", "OTPManager.API\OTPManager.API.csproj", "{861DBB39-3003-4DA1-B6A2-2458AB71576C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTPManager.Application", "OTPManager.Application\OTPManager.Application.csproj", "{98EFA9E5-C783-482C-B2F0-5A895E34D584}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{861DBB39-3003-4DA1-B6A2-2458AB71576C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861DBB39-3003-4DA1-B6A2-2458AB71576C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861DBB39-3003-4DA1-B6A2-2458AB71576C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861DBB39-3003-4DA1-B6A2-2458AB71576C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EFA9E5-C783-482C-B2F0-5A895E34D584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EFA9E5-C783-482C-B2F0-5A895E34D584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EFA9E5-C783-482C-B2F0-5A895E34D584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EFA9E5-C783-482C-B2F0-5A895E34D584}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {113CF2B8-36C6-4B0D-8597-1D68C26EEAC7}
+	EndGlobalSection
+EndGlobal
