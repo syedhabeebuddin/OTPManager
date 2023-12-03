@@ -10,9 +10,13 @@ namespace OTPManager.API.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IOTPAuthenticator _otpAuthenticator;
-        public AuthenticationController(IOTPAuthenticator otpAuthenticator)
+        private readonly ILogger<AuthenticationController> _logger;
+        public AuthenticationController(
+            IOTPAuthenticator otpAuthenticator
+            , ILogger<AuthenticationController> logger)
         {
             _otpAuthenticator = otpAuthenticator;
+            _logger = logger;
         }
 
         [HttpGet("{phone}")]
@@ -21,10 +25,18 @@ namespace OTPManager.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get2FACode([CustomPhone] string phone)
         {
-            if (_otpAuthenticator.IsLimitExceeded(phone))
-                return Problem("Reached Max Limit");
+            _logger.LogInformation("Generate Code");
 
-            return Ok(_otpAuthenticator.GenerateCode(phone));
+            if (_otpAuthenticator.IsLimitExceeded(phone))
+            {
+                _logger.LogDebug("The phone {phone}, has reached the limit of max number of codes", phone);
+                return Problem("Reached Max Limit");
+            }
+
+            var code = _otpAuthenticator.GenerateCode(phone);
+            _logger.LogInformation("Generated Code : {code}", code);
+
+            return Ok(code);
         }
         
         [HttpPost]
@@ -32,8 +44,13 @@ namespace OTPManager.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Verify2FACode(VerifyCodeRequest verifyCodeRequest)
-        {            
-            return Ok(_otpAuthenticator.VerifyCode(verifyCodeRequest.Phone, verifyCodeRequest.Code));
+        {
+            _logger.LogInformation("Verify Code");
+
+            var isValid = _otpAuthenticator.VerifyCode(verifyCodeRequest.Phone, verifyCodeRequest.Code);
+            _logger.LogInformation("Is Code Valid : {isValid}", isValid);
+
+            return Ok(isValid);
         }
     }
 }

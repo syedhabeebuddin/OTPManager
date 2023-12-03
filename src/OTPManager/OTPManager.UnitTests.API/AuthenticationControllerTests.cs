@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using OTPManager.API.Controllers;
 using OTPManager.API.Models;
@@ -8,12 +9,21 @@ using OTPManager.Application.Services;
 
 namespace OTPManager.UnitTests.API
 {
-    public class AuthenticationControllerTests
+    public class AuthenticationControllerTests : IDisposable
     {
-        private readonly Mock<IOTPAuthenticator> _otpAuthenticatorMock;
+        private Mock<IOTPAuthenticator> _otpAuthenticatorMock;
+        private Mock<ILogger<AuthenticationController>> _loggerMock;
         public AuthenticationControllerTests()
         {
             _otpAuthenticatorMock = new Mock<IOTPAuthenticator>();
+            _loggerMock = new Mock<ILogger<AuthenticationController>>();
+        }
+
+        //Note : To Cleanup / Dispose , after each test case.
+        public void Dispose()
+        {
+            _otpAuthenticatorMock = null;
+            _loggerMock = null;
         }
 
         [Fact]
@@ -25,7 +35,7 @@ namespace OTPManager.UnitTests.API
             _otpAuthenticatorMock.Setup(x => x.GenerateCode(It.IsAny<string>())).Returns(code);
 
             //Act
-            var authenticationController = new AuthenticationController(_otpAuthenticatorMock.Object);
+            var authenticationController = new AuthenticationController(_otpAuthenticatorMock.Object,_loggerMock.Object);
             var actualResult = authenticationController.Get2FACode(code) as OkObjectResult;
 
             //Assert
@@ -49,7 +59,7 @@ namespace OTPManager.UnitTests.API
             var request = new VerifyCodeRequest { Phone = phone, Code = code };
 
             //Act
-            var authenticationController = new AuthenticationController(_otpAuthenticatorMock.Object);            
+            var authenticationController = new AuthenticationController(_otpAuthenticatorMock.Object, _loggerMock.Object);            
             var actualResult = authenticationController.Verify2FACode(request) as OkObjectResult;
 
             //Assert
