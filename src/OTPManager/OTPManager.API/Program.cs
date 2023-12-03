@@ -1,3 +1,5 @@
+using OTPManager.API.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMemoryCache();
+builder.Services.AddOTPManagerServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

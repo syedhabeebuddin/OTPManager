@@ -2,7 +2,7 @@
 {
     public interface ITwoFactorAuthenticator
     {
-        public string GenerateCode(string phoneNumber);
-        public (bool isValid, long timeStepMatched) VerifyCode(string code, string phoneNumber, long previousTimeStamp);
+        public string GenerateCode(string phone);
+        public (bool isValid, long timeStepMatched) VerifyCode(string code, string phone, long previousTimeStamp);
     }
 }

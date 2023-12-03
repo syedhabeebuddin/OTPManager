@@ -19,7 +19,7 @@ namespace OTPManager.API.Controllers
         public IActionResult Get2FACode([CustomPhone] string phone)
         {
             if (_otpAuthenticator.IsLimitExceeded(phone))
-                return Problem("Limit Exceeded");
+                return Problem("Reached Max Limit");
 
             return Ok(_otpAuthenticator.GenerateCode(phone));
         }
@@ -27,7 +27,7 @@ namespace OTPManager.API.Controllers
         [HttpPost]
         public IActionResult Verify2FACode(VerifyCodeRequest verifyCodeRequest)
         {
-            return Ok(_otpAuthenticator.VerifyCode(verifyCodeRequest.Code, verifyCodeRequest.Phone));
+            return Ok(_otpAuthenticator.VerifyCode(verifyCodeRequest.Phone, verifyCodeRequest.Code));
         }
     }
 }

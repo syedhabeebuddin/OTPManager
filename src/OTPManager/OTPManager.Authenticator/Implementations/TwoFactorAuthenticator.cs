@@ -1,16 +1,17 @@
-﻿using OTPManager.Infrastructure.TOTPClient.Services;
+﻿using OTPManager.Authenticator.Contracts;
+using OTPManager.Infrastructure.TOTPClient.Services;
 using OtpNet;
 
 namespace OTPManager.Authenticator.Implementations
 {
-    public class TwoFactorAuthenticator
+    public class TwoFactorAuthenticator : ITwoFactorAuthenticator
     {
         private readonly ITOTPClient _totpClient;
         public TwoFactorAuthenticator(ITOTPClient totpClient)
         {
             _totpClient = totpClient;
         }
-        public string GenerateCode(string phoneNumber)
+        public string GenerateCode(string phone)
         {
             //string base32Secret = "6L4OH6DDC4PLNQBA5422GM67KXRDIQQP";
             //var secret = Base32Encoding.ToBytes(base32Secret);
@@ -22,7 +23,7 @@ namespace OTPManager.Authenticator.Implementations
 
         }
 
-        public (bool isValid, long timeStepMatched) VerifyCode(string code, string phoneNumber, long previousTimeStamp)
+        public (bool isValid, long timeStepMatched) VerifyCode(string code, string phone, long previousTimeStamp)
         {
             //string base32Secret = "6L4OH6DDC4PLNQBA5422GM67KXRDIQQP";
             //var secret = Base32Encoding.ToBytes(base32Secret);

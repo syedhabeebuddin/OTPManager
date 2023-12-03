@@ -21,7 +21,7 @@ namespace OTPManager.Application.Services
             var metaData = new OTPMetadata
             {
                 Code = code,
-                ExpirationTime = DateTime.UtcNow.AddSeconds(30),
+                ExpirationTime = DateTime.UtcNow.AddSeconds(60),
                 GeneratedTime = DateTime.UtcNow,
                 Phone = phoneNumber
             };
@@ -30,10 +30,10 @@ namespace OTPManager.Application.Services
             return code;
         }
 
-        public bool VerifyCode(string code, string phoneNumber)
+        public bool VerifyCode(string phone, string code)
         {
-            var item = _cacheManager.GetItem(phoneNumber, code);
-            return item != null && item.IsValid(phoneNumber, code);
+            var item = _cacheManager.GetItem(phone, code);
+            return item != null && item.IsValid(phone, code);
         }
 
         public bool IsLimitExceeded(string phone)
